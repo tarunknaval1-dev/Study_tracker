@@ -66,6 +66,28 @@ def view_sessions(sessions):
     print(f"\nTotal study time: {hours} hour(s), {minutes} minute(s)\n")
 
 
+def subject_summary(sessions):
+    if not sessions:
+        print("\nNo study sessions recorded yet.\n")
+        return
+
+    subject_totals = {}
+
+    for session in sessions:
+        subject = session["subject"]
+        subject_totals[subject] = (
+            subject_totals.get(subject, 0) + session["minutes"]
+        )
+
+    print("\n--- Study Time by Subject ---")
+
+    for subject, total_minutes in sorted(subject_totals.items()):
+        hours, minutes = divmod(total_minutes, 60)
+        print(f"{subject}: {hours} hour(s), {minutes} minute(s)")
+
+    print()
+
+
 def main():
     sessions = load_sessions()
 
@@ -73,7 +95,8 @@ def main():
         print("\n--- Personal Study Tracker ---")
         print("1. Add Study Session")
         print("2. View Study Sessions")
-        print("3. Exit")
+        print("3. Subject-wise Summary")
+        print("4. Exit")
 
         choice = input("Choose an option: ").strip()
 
@@ -82,6 +105,8 @@ def main():
         elif choice == "2":
             view_sessions(sessions)
         elif choice == "3":
+            subject_summary(sessions)
+        elif choice == "4":
             print("Keep learning!")
             break
         else:

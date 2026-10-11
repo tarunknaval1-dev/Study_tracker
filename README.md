@@ -10,7 +10,9 @@ A simple Python command-line application to record daily study sessions.
 - View saved study sessions 
 - View total study time for each subject
 - Set a daily study goal and check today's progress
-- Save study sessions locally using JSON
+- View a report for the current week
+- Export study sessions to CSV
+-
 
 ## Run the Project
 
